@@ -87,8 +87,13 @@ class VioInterface {
            const okvis::MapPointVector &)> LandmarksCallback;
 
   typedef std::function<
-      void(const okvis::Time &, const okvis::kinematics::Transformation &,
-           const cv::Mat &)> DenseCallback;
+      void(const okvis::Time &,
+           const okvis::kinematics::Transformation &,
+           const cv::Mat &,
+           const double focalU,
+           const double focalV,
+           const double centerU,
+           const double centerV)> DenseCallback;
 
   VioInterface();
   virtual ~VioInterface();

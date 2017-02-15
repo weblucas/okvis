@@ -904,7 +904,7 @@ void ThreadedKFVio::publisherLoop() {
                                               , parameters_.publishing.landmarkQualityThreshold
                                               , result.landmarksVector, T_WC0, denseLandmarks,0.1,3,0.5);
 
-        denseCallback_(result.stamp, T_WC0, denseLandmarks);  //TODO(gohlp): why two maps?
+        denseCallback_(result.stamp, T_WC0, denseLandmarks,fU, fV, cU, cV);
 
     }
   }
