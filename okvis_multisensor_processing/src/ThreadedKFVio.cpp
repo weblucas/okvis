@@ -46,6 +46,8 @@
 #include <okvis/assert_macros.hpp>
 #include <okvis/ceres/ImuError.hpp>
 
+#include <okvis/mesh_mapping.hpp>
+
 /// \brief okvis Main namespace of this package.
 namespace okvis {
 
@@ -872,9 +874,41 @@ void ThreadedKFVio::publisherLoop() {
                                        result.speedAndBiases, result.omega_S,
                                        result.vector_of_T_SCi);
     if (landmarksCallback_ && !result.landmarksVector.empty())
-      landmarksCallback_(result.stamp, result.landmarksVector,
-                         result.transferredLandmarks);  //TODO(gohlp): why two maps?
+    {
+        landmarksCallback_(result.stamp, result.landmarksVector, result.transferredLandmarks);  //TODO(gohlp): why two maps?
+
+        static double fU,fV,cU,cV;
+        static int dimU,dimV;
+        static bool firstTime = true;
+        static cv::Mat_<cv::Vec2f> denseLandmarks;
+        if(firstTime)
+        {
+            std::shared_ptr<const cameras::CameraBase> camGeometry = parameters_.nCameraSystem.cameraGeometry(0);
+            Eigen::VectorXd intrinsics;
+            camGeometry->getIntrinsics(intrinsics);
+            fU = intrinsics[0];  //< focalLengthU
+            fV = intrinsics[1];  //< focalLengthV
+            cU = intrinsics[2];  //< imageCenterU
+            cV = intrinsics[3];  //< imageCenterV
+            dimU = camGeometry->imageWidth();
+            dimV = camGeometry->imageHeight();
+            denseLandmarks = cv::Mat::zeros(cv::Size(dimU, dimV),CV_32FC2);
+            firstTime = false;
+        }
+
+
+
+        //cv::Mat denseLandmarks;
+        okvis::kinematics::Transformation T_WC0 = result.T_WS * result.vector_of_T_SCi[0];
+        mesh_based_mapping::buildMeshDepthMap(fU, fV, cU, cV, dimU, dimV
+                                              , parameters_.publishing.landmarkQualityThreshold
+                                              , result.landmarksVector, T_WC0, denseLandmarks,0.1,3,0.5);
+
+        denseCallback_(result.stamp, T_WC0, denseLandmarks);  //TODO(gohlp): why two maps?
+
+    }
   }
 }
 
 }  // namespace okvis
+
