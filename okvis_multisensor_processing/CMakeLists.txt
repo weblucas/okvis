@@ -17,7 +17,11 @@ include_directories(${EIGEN_INCLUDE_DIR})
 # require OpenCV
 find_package( OpenCV COMPONENTS core highgui imgproc features2d REQUIRED )
 include_directories(BEFORE ${OpenCV_INCLUDE_DIRS}) 
+
+# require for the mesh_based_mapping
 include_directories(../third_party/fade_v1.46a/include_fade2d)
+include_directories(../third_party/v4rl_mesh_based_mapping/include)
+
 
 
 add_library(${PROJECT_NAME}

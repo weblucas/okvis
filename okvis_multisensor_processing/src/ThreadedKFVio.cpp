@@ -46,7 +46,7 @@
 #include <okvis/assert_macros.hpp>
 #include <okvis/ceres/ImuError.hpp>
 
-#include <okvis/mesh_mapping.hpp>
+#include <mesh_based_mapping.hpp>
 
 /// \brief okvis Main namespace of this package.
 namespace okvis {
