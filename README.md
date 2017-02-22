@@ -1,4 +1,6 @@
-This is a modified version of OKVIS. Please check the page of the [mesh-based mapping repository](https://github.com/weblucas/mesh_based_mapping/)
+This is a modified version of OKVIS.  As we did not update the standalone application, you will be unable to see our results with this application only. You need to use together with the OKVIS ROS. Please read the readme of the main repository of [our mesh-based mapping](https://github.com/weblucas/mesh_based_mapping/). There you can find instruction how to build and run, dataset and license.
+
+---
 
 README                        {#mainpage}
 ======
