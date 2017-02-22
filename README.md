@@ -1,4 +1,4 @@
-This is a modified version of OKVIS.  In order to mesh out the OKVIS map with our code, please refer to the README inside the main repository of [our mesh-based mapping](https://github.com/weblucas/mesh_based_mapping/) for instructions to build and run this code, as well as our dataset and license information.
+This is a forked version of OKVIS.  In order to mesh out the OKVIS map with our code, please refer to the README inside the main repository of [our mesh-based mapping](https://github.com/weblucas/mesh_based_mapping/) for instructions to build and run this code, as well as our dataset and license information.
 
 ---
 
