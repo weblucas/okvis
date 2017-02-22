@@ -2,7 +2,9 @@ This is a modified version of OKVIS.  As we did not update the standalone applic
 
 ---
 
-README                        {#mainpage}
+Below this point, you can find the original okvis documentation.
+
+Original OKVIS README                        {#mainpage}
 ======
 
 Welcome to OKVIS: Open Keyframe-based Visual-Inertial SLAM. 
