@@ -875,7 +875,8 @@ void ThreadedKFVio::publisherLoop() {
                                        result.vector_of_T_SCi);
     if (landmarksCallback_ && !result.landmarksVector.empty())
     {
-        landmarksCallback_(result.stamp, result.landmarksVector, result.transferredLandmarks);  //TODO(gohlp): why two maps?
+        if(parameters_.publishing.publishLucasPCS)
+            landmarksCallback_(result.stamp, result.landmarksVector, result.transferredLandmarks);  //TODO(gohlp): why two maps?
 
         static double fU,fV,cU,cV;
         static int dimU,dimV;
@@ -897,14 +898,23 @@ void ThreadedKFVio::publisherLoop() {
         }
 
 
+    if(parameters_.publishing.publishDenseLandmarks)
+    {
+            //cv::Mat denseLandmarks;
+            okvis::kinematics::Transformation T_WC0 = result.T_WS * result.vector_of_T_SCi[0];
+            mesh_based_mapping::buildMeshDepthMap(fU, fV, cU, cV, dimU, dimV
+                                                  , parameters_.publishing.landmarkQualityThreshold
+                                                  , result.landmarksVector, T_WC0, denseLandmarks,0.1,3,0.5);
 
-        //cv::Mat denseLandmarks;
-        okvis::kinematics::Transformation T_WC0 = result.T_WS * result.vector_of_T_SCi[0];
-        mesh_based_mapping::buildMeshDepthMap(fU, fV, cU, cV, dimU, dimV
-                                              , parameters_.publishing.landmarkQualityThreshold
-                                              , result.landmarksVector, T_WC0, denseLandmarks,0.1,3,0.5);
+            denseCallback_(result.stamp, T_WC0, denseLandmarks,fU, fV, cU, cV);
+    }
 
-        denseCallback_(result.stamp, T_WC0, denseLandmarks,fU, fV, cU, cV);
+    if(parameters_.publishing.publishCameraCentricLandmarks)
+    {
+            //cv::Mat denseLandmarks;
+            okvis::kinematics::Transformation T_WC0 = result.T_WS * result.vector_of_T_SCi[0];
+            cameraLandmarksCallback_(result.stamp, T_WC0, result.landmarksVector);
+    }
 
     }
   }

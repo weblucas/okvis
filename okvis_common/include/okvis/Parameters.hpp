@@ -266,6 +266,11 @@ enum class FrameName { B, S, W, Wc };
 struct PublishingParameters {
   EIGEN_MAKE_ALIGNED_OPERATOR_NEW
   int publishRate = 200;  ///< Maximum publishing rate. [Hz]
+  float minCameraLandmarkDistance = 1.0; ///< min distance from the camera
+  bool publishCameraCentricLandmarks = false; ///< Select, if you want to publish mesh-based landmarks at all.
+  bool publishDenseLandmarks = true; ///< Select, if you want to publish mesh-based landmarks at all.
+  bool publishLucasPCS = true; ///< Select, if you want to publish mesh-based landmarks at all.
+
   bool publishLandmarks = true; ///< Select, if you want to publish landmarks at all.
   float landmarkQualityThreshold = 1.0e-5; ///< Quality threshold under which landmarks are not published. Between 0 and 1.
   float maxLandmarkQuality = 0.05; ///< Quality above which landmarks are assumed to be of the best quality. Between 0 and 1.

@@ -89,6 +89,11 @@ class VioInterface {
   typedef std::function<
       void(const okvis::Time &,
            const okvis::kinematics::Transformation &,
+           const okvis::MapPointVector &)> CameraLandmarksCallback;
+
+  typedef std::function<
+      void(const okvis::Time &,
+           const okvis::kinematics::Transformation &,
            const cv::Mat &,
            const double focalU,
            const double focalV,
@@ -301,6 +306,9 @@ class VioInterface {
   virtual void setDenseCallback(
       const DenseCallback & denseCallback);
 
+  virtual void setCameraLandmarksCallback(
+      const CameraLandmarksCallback & CameraLandmarksCallback);
+
   /**
    * \brief Set the blocking variable that indicates whether the addMeasurement() functions
    *        should return immediately (blocking=false), or only when the processing is complete.
@@ -325,6 +333,7 @@ class VioInterface {
   FullStateCallbackWithExtrinsics fullStateCallbackWithExtrinsics_; ///< Full state and extrinsics callback function.
   LandmarksCallback landmarksCallback_; ///< Landmarks callback function.
   DenseCallback denseCallback_;
+  CameraLandmarksCallback cameraLandmarksCallback_;
   std::shared_ptr<std::fstream> csvImuFile_;  ///< IMU CSV file.
   std::shared_ptr<std::fstream> csvPosFile_;  ///< Position CSV File.
   std::shared_ptr<std::fstream> csvMagFile_;  ///< Magnetometer CSV File

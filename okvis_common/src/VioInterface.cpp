@@ -104,6 +104,11 @@ void VioInterface::setDenseCallback(
   denseCallback_ = denseCallback;
 }
 
+void VioInterface::setCameraLandmarksCallback(
+    const CameraLandmarksCallback & cameraLandmarksCallback) {
+  cameraLandmarksCallback_ = cameraLandmarksCallback;
+}
+
 // Set the blocking variable that indicates whether the addMeasurement() functions
 // should return immediately (blocking=false), or only when the processing is complete.
 void VioInterface::setBlocking(bool blocking) {

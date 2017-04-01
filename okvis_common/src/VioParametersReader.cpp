@@ -261,6 +261,21 @@ void VioParametersReader::readConfigFile(const std::string& filename) {
   parseBoolean(file["publishing_options"]["publishLandmarks"],
                    vioParameters_.publishing.publishLandmarks);
 
+  parseBoolean(file["publishing_options"]["publishDenseLandmarks"],
+                   vioParameters_.publishing.publishDenseLandmarks);
+
+  parseBoolean(file["publishing_options"]["publishCameraCentricLandmarks"],
+                   vioParameters_.publishing.publishCameraCentricLandmarks);
+
+  parseBoolean(file["publishing_options"]["publishLucasPCS"],
+                   vioParameters_.publishing.publishLucasPCS);//TODO tirar
+
+  if (file["publishing_options"]["minCameraLandmarkDistance"].isReal()) {
+    file["publishing_options"]["minCameraLandmarkDistance"]
+        >> vioParameters_.publishing.minCameraLandmarkDistance;
+  }
+
+
   cv::FileNode T_Wc_W_ = file["publishing_options"]["T_Wc_W"];
   if(T_Wc_W_.isSeq()) {
     Eigen::Matrix4d T_Wc_W_e;
