@@ -1,5 +1,5 @@
 #ifdef FADE2D_EXPORT
- #error FADE2D_EXPORT is defined
+#error FADE2D_EXPORT is defined
 #endif
 
 #pragma once

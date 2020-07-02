@@ -19,7 +19,7 @@ find_package( OpenCV COMPONENTS core highgui imgproc features2d REQUIRED )
 include_directories(BEFORE ${OpenCV_INCLUDE_DIRS}) 
 
 # require for the mesh_based_mapping
-include_directories(../third_party/fade_v1.46a/include_fade2d)
+include_directories(../third_party/fade_v1.78/include_fade2d)
 include_directories(../third_party/v4rl_mesh_based_mapping/include)
 
 
@@ -48,7 +48,7 @@ target_link_libraries(${PROJECT_NAME}
    PUBLIC okvis_ceres 
    PUBLIC okvis_frontend
    PRIVATE ${GLOG_LIBRARIES}
-   PUBLIC ${PROJECT_SOURCE_DIR}/../third_party/fade_v1.46a/lib_ubuntu14.04_x86_64/libfade2d.so
+   PUBLIC ${PROJECT_SOURCE_DIR}/../third_party/fade_v1.78/lib_ubuntu18.04_x86_64/libfade2d.so
 )
 
 # export config

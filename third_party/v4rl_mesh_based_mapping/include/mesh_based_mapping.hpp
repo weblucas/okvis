@@ -214,11 +214,11 @@ void projectLandmarks(const double focalU, const double focalV,
 
 */
 void writeCSV(std::string filename, cv::Mat m) {
-  cv::Formatter const *c_formatter(cv::Formatter::get("CSV"));
-  std::ofstream myfile;
-  myfile.open(filename.c_str());
-  c_formatter->write(myfile, m);
-  myfile.close();
+  //cv::Formatter const *c_formatter(cv::Formatter::get("CSV"));
+  //std::ofstream myfile;
+  //myfile.open(filename.c_str());
+  //c_formatter->write(myfile, m);
+  //myfile.close();
 }
 
 /**
